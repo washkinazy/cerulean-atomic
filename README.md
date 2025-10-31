@@ -1,43 +1,58 @@
-# BlueBuild Template &nbsp; [![bluebuild build badge](https://github.com/blue-build/template/actions/workflows/build.yml/badge.svg)](https://github.com/blue-build/template/actions/workflows/build.yml)
+# Cerulean Atomic
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+[![bluebuild build badge](https://github.com/washkinazy/cerulean-atomic/actions/workflows/build.yml/badge.svg)](https://github.com/washkinazy/cerulean-atomic/actions/workflows/build.yml)
 
-After setup, it is recommended you update this README to describe your custom image.
+A minimal Fedora Atomic image with COSMIC desktop, latest kernel, and container-first development workflow.
 
 ## Installation
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+To rebase an existing Fedora Atomic installation to Cerulean:
 
-To rebase an existing atomic Fedora installation to the latest build:
+First rebase to the unsigned image to install signing keys and policies:
+```bash
+rpm-ostree rebase ostree-unverified-registry:ghcr.io/washkinazy/cerulean:42
+systemctl reboot
+```
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/blue-build/template:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/blue-build/template:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
+Then rebase to the signed image:
+```bash
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/washkinazy/cerulean:42
+systemctl reboot
+```
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
+## Available Images
 
-## ISO
+- `cerulean:42` - Fedora 42 stable
+- `cerulean:rawhide` - Fedora Rawhide (bleeding edge)
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/learn/universal-blue/#fresh-install-from-an-iso). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
+## ISO Installation
+
+Generate a bootable ISO locally:
+```bash
+just iso-42        # Fedora 42
+just iso-rawhide   # Fedora Rawhide
+```
+
+After installing from the ISO, you must rebase to the container image:
+```bash
+rpm-ostree rebase ostree-unverified-registry:ghcr.io/washkinazy/cerulean:42
+systemctl reboot
+rpm-ostree rebase ostree-image-signed:docker://ghcr.io/washkinazy/cerulean:42
+systemctl reboot
+```
 
 ## Verification
 
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+Images are signed with cosign. Verify the signature:
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/blue-build/template
+cosign verify --key cosign.pub ghcr.io/washkinazy/cerulean:42
+```
+
+## Development
+
+Build locally:
+```bash
+just build-42      # Build Fedora 42 image
+just build-rawhide # Build Fedora Rawhide image
 ```
