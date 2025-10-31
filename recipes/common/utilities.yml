@@ -1,0 +1,46 @@
+modules:
+  - type: dnf
+    install:
+      packages:
+        # Package Groups
+        - "@admin-tools"
+        - "@core"
+        - "@fonts"
+        - "@hardware-support"
+        - "@networkmanager-submodules"
+        - "@printing"
+        - "@standard"
+        # Packages
+        - duf                    # Disk usage analyzer
+        - ncdu                   # NCurses disk usage
+        - hwinfo                 # Hardware information
+        - inxi                   # System information
+        - btop                   # Modern htop alternative
+        - nvtop                  # GPU monitoring
+        - nmon                   # System monitor
+        - fastfetch              # System info display
+        - mc                     # Midnight Commander
+        - git                    # Version control
+        - rsync                  # File synchronization
+        - wget                   # File downloader
+        - curl                   # HTTP client
+        - openssl                # Cryptography tools
+        - trash-cli              # Safe file removal
+        - dkms                   # Dynamic kernel modules
+        - akmods                 # Automatic kernel modules
+        - tuned                  # Performance tuning
+        - tuned-ppd              # Power profile daemon
+        - plymouth-plugin-script # Boot splash
+        - hplip                  # HP printer drivers
+        - system-config-printer  # Printer configuration
+        - libmediainfo         # Media file information
+        - libva                # Video acceleration
+        - libva-utils          # VA-API utilities
+        - xdg-desktop-portal-gtk
+        - xdg-desktop-portal
+        - bash-completion
+        - trash-cli
+        - qt6-qtwayland
+        - qt5-qtwayland
+        - chezmoi               # Dotfile management
+        - vim

@@ -5,11 +5,11 @@
 image_name := "cerulean"
 
 # Available versions
-version_42 := "recipe.yml"
+version_43 := "recipe.yml"
 version_rawhide := "recipe-rawhide.yml"
 
 # Default recipe to use
-default_recipe := version_42
+default_recipe := version_43
 
 # Show available commands
 default:
@@ -27,10 +27,10 @@ build RECIPE=default_recipe:
     @echo "Building image from recipes/{{ RECIPE }}"
     bluebuild build recipes/{{ RECIPE }}
 
-# Build Fedora 42 variant
+# Build Fedora 43 variant
 [group('Development')]
-build-42:
-    @just build {{ version_42 }}
+build-43:
+    @just build {{ version_43 }}
 
 # Build Fedora Rawhide variant
 [group('Development')]
@@ -46,10 +46,10 @@ iso RECIPE=default_recipe OUTPUT="cerulean.iso":
     @echo "ISO created: {{ OUTPUT }}"
     @echo "Use with: virt-install or dd to USB"
 
-# Generate ISO for Fedora 42
+# Generate ISO for Fedora 43
 [group('Development')]
-iso-42:
-    @just iso {{ version_42 }} cerulean-42.iso
+iso-43:
+    @just iso {{ version_43 }} cerulean-43.iso
 
 # Generate ISO for Fedora Rawhide
 [group('Development')]

@@ -29,7 +29,6 @@ jobs:
         recipe:
           # Fedora versions
           - recipe.yml          # Fedora 43
-          - recipe-rawhide.yml  # Fedora Rawhide (44)
     steps:
       # the build is fully handled by the reusable github action
       - name: Build Custom Image
