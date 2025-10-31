@@ -13,6 +13,7 @@ image-version: 43 # Fedora 43
 # you can include multiple instances of the same module
 modules:
   - from-file: common/cosmic-de.yml
+  - from-file: common/utilities.yml
 
   # - type: files
   #   files:
