@@ -1,13 +1,13 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/washkinazy/cerulean
-name: cerulean
+name: cerulean-rawhide
 # description will be included in the image's metadata
 description: A minimal Fedora Atomic image with COSMIC desktop, latest kernel, and container-first development workflow.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: quay.io/fedora-ostree-desktops/base-atomic
-image-version: rawhide # Fedora Rawhide (bleeding edge)
+image-version: rawhide # Fedora Rawhide (bleeding edge -- currently 44)
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
