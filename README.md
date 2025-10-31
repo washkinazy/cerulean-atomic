@@ -22,14 +22,14 @@ systemctl reboot
 
 ## Available Images
 
-- `cerulean:42` - Fedora 42 stable
+- `cerulean:43` - Fedora 42 stable
 - `cerulean:rawhide` - Fedora Rawhide (bleeding edge)
 
 ## ISO Installation
 
 Generate a bootable ISO locally:
 ```bash
-just iso-42        # Fedora 42
+just iso-43        # Fedora 43
 just iso-rawhide   # Fedora Rawhide
 ```
 
@@ -53,6 +53,6 @@ cosign verify --key cosign.pub ghcr.io/washkinazy/cerulean:42
 
 Build locally:
 ```bash
-just build-42      # Build Fedora 42 image
+just build-43      # Build Fedora 42 image
 just build-rawhide # Build Fedora Rawhide image
 ```
