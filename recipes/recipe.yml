@@ -14,6 +14,8 @@ image-version: 43 # Fedora 43
 modules:
   - from-file: common/cosmic-de.yml
   - from-file: common/utilities.yml
+  - from-file: common/fonts.yml
+  - from-file: common/applications.yml
 
   # - type: files
   #   files:
