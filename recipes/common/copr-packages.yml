@@ -1,0 +1,7 @@
+---
+# COPR packages installed using isolated method for security
+# Currently installs: walker, elephant from washkinazy/wayland-wm-extras
+modules:
+  - type: script
+    scripts:
+      - install-copr-packages.sh

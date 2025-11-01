@@ -1,5 +1,5 @@
 #!/bin/bash
 # Cerulean wrapper for just with --unstable flag
-# Sets working directory to /usr/share/ublue-os where justfile is located
-cd /usr/share/ublue-os || exit 1
+# Sets working directory to /usr/share/cerulean where justfile is located
+cd /usr/share/cerulean || exit 1
 exec just --unstable "$@"

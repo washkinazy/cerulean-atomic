@@ -18,6 +18,9 @@ modules:
   - from-file: common/applications.yml
   - from-file: common/gaming-42.yml
   - from-file: common/nvidia-open-modules.yml
+  - from-file: common/codecs.yml
+  - from-file: common/extras.yml
+  - from-file: common/copr-packages.yml
 
   - type: files
     files:

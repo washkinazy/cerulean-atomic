@@ -7,3 +7,4 @@ default:
 
 # Import module files
 import? "just/10-update.just"
+import? "just/20-thinkpad.just"
