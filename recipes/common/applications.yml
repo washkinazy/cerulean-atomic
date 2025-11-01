@@ -1,32 +1,39 @@
 modules:
   - type: dnf
     install:
+      install-weak-deps: false
       packages:
-        - alacritty
-        - fish
-        - just
-        - Thunar
-        - thunar-volman
-        - thunar-archive-plugin
-        - thunar-media-tags-plugin
-        - xarchiver
-        - tumbler
-        - ffmpegthumbnailer
-        - gnome-disk-utility
-        - udiskie
-        - unzip
-        - unrar
-        - p7zip
-        - p7zip-plugins
-        - zip
-        - bzip2
-        - mpv         # Video player
-        - qimgv       # Image viewer
-        - okular      # PDF viewer
-        - featherpad  # Text editor
-        - inkscape
-        - gimp
-        - rawtherapee
-        - "@libreoffice"
-        - firefox
-        - chromium
+      # Terminal & shell
+      - alacritty
+      - fish
+      - just
+      # File manager
+      - Thunar
+      - thunar-volman
+      - thunar-archive-plugin
+      - thunar-media-tags-plugin
+      - xarchiver
+      - tumbler
+      - ffmpegthumbnailer
+      - gnome-disk-utility
+      - udiskie
+      # Archive tools
+      - unzip
+      - unrar
+      - p7zip
+      - p7zip-plugins
+      - zip
+      - bzip2
+      # Media applications
+      - mpv         # Video player
+      - qimgv       # Image viewer
+      - okular      # PDF viewer
+      - featherpad  # Text editor
+      # Graphics
+      - inkscape
+      - gimp
+      - rawtherapee
+      # Office & browsers
+      - "@libreoffice"
+      - firefox
+      - chromium

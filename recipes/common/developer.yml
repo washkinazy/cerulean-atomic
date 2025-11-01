@@ -1,0 +1,57 @@
+---
+# Development environment setup
+modules:
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://cli.github.com/packages/rpm/gh-cli.repo
+        - https://mise.jdx.dev/rpm/mise.repo
+        - https://download.docker.com/linux/fedora/docker-ce.repo
+        - https://packages.microsoft.com/yumrepos/vscode/config.repo
+      keys:
+        - https://packages.microsoft.com/keys/microsoft.asc
+    install:
+      install-weak-deps: false
+      packages:
+        # Fedora repos
+        - kernel-devel
+        - git
+        - just
+        - yamllint
+        - shellcheck
+        - jq
+        - podman-compose
+        - distrobox
+        - "@virtualization"
+        - rust
+        - cargo
+        - pip
+        - pipx
+        - golang
+        # GitHub CLI repo
+        - gh
+        # mise repo
+        - mise
+        # VS Code repo
+        - code
+        # Docker CE repo
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+
+  # Configure libvirt networking
+  - type: files
+    files:
+      - source: developer
+        destination: /
+
+  # Enable services (using socket activation where available)
+  - type: systemd
+    system:
+      enabled:
+        - docker.socket
+        - podman.socket
+        - libvirtd.service

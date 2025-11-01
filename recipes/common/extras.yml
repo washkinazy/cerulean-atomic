@@ -1,15 +1,13 @@
 ---
 # Extra packages for quality of life
 modules:
-  - type: containerfile
-    snippets:
-      # Add Tailscale repository and install
-      - RUN dnf config-manager --add-repo https://pkgs.tailscale.com/stable/fedora/tailscale.repo
-      - RUN dnf install -y tailscale
-      # Remove Tailscale repo file after install (security best practice)
-      - RUN rm -f /etc/yum.repos.d/tailscale.repo
-
-  - type: systemd
-    system:
-      enabled:
-        - tailscaled.service
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+    install:
+      install-weak-deps: false
+      packages:
+        # Third-party repos: tailscale
+        - tailscale

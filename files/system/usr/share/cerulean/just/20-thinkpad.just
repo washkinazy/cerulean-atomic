@@ -4,24 +4,25 @@
 thinkpad-setup:
     #!/usr/bin/bash
     set -euo pipefail
+    source /usr/share/cerulean/just/colors.sh
 
-    echo "🔧 Applying ThinkPad hardware optimizations..."
+    echo -e "${BLUE}Applying ThinkPad hardware optimizations...${NC}"
     echo ""
 
     # Kernel arguments
-    echo "📝 Adding kernel argument: acpi.ec_no_wakeup=1"
+    echo -e "${BLUE}Adding kernel argument: acpi.ec_no_wakeup=1${NC}"
     echo "   (Reduces suspend power usage)"
     if rpm-ostree kargs | grep -q "acpi.ec_no_wakeup=1"; then
-        echo "   ✅ Already present"
+        echo -e "   ${GREEN}Already present${NC}"
     else
         rpm-ostree kargs --append="acpi.ec_no_wakeup=1"
-        echo "   ✅ Added"
+        echo -e "   ${GREEN}Added${NC}"
     fi
 
     echo ""
 
     # WiFi workaround
-    echo "📡 Installing WiFi module reset script..."
+    echo -e "${BLUE}Installing WiFi module reset script...${NC}"
     echo "   (Fixes Qualcomm ath11k_pci suspend/resume issues)"
 
     sudo tee /etc/systemd/system-sleep/reset-wifi-module.sh > /dev/null <<'EOF'
@@ -42,11 +43,11 @@ esac
 EOF
 
     sudo chmod +x /etc/systemd/system-sleep/reset-wifi-module.sh
-    echo "   ✅ Installed to /etc/systemd/system-sleep/reset-wifi-module.sh"
+    echo -e "   ${GREEN}Installed to /etc/systemd/system-sleep/reset-wifi-module.sh${NC}"
 
     echo ""
-    echo "✅ ThinkPad optimizations applied!"
-    echo "⚠️  Reboot required to activate kernel arguments"
+    echo -e "${GREEN}ThinkPad optimizations applied!${NC}"
+    echo -e "${YELLOW}Reboot required to activate kernel arguments${NC}"
     echo ""
     echo "To undo kernel arguments later:"
     echo '   rpm-ostree kargs --delete="acpi.ec_no_wakeup=1"'
@@ -55,30 +56,31 @@ EOF
 thinkpad-remove:
     #!/usr/bin/bash
     set -euo pipefail
+    source /usr/share/cerulean/just/colors.sh
 
-    echo "🔧 Removing ThinkPad hardware optimizations..."
+    echo -e "${BLUE}Removing ThinkPad hardware optimizations...${NC}"
     echo ""
 
     # Remove kernel arguments
-    echo "📝 Removing kernel argument: acpi.ec_no_wakeup=1"
+    echo -e "${BLUE}Removing kernel argument: acpi.ec_no_wakeup=1${NC}"
     if rpm-ostree kargs | grep -q "acpi.ec_no_wakeup=1"; then
         rpm-ostree kargs --delete="acpi.ec_no_wakeup=1"
-        echo "   ✅ Removed"
+        echo -e "   ${GREEN}Removed${NC}"
     else
-        echo "   ℹ️  Not present"
+        echo -e "   ${CYAN}Not present${NC}"
     fi
 
     echo ""
 
     # Remove WiFi workaround
-    echo "📡 Removing WiFi module reset script..."
+    echo -e "${BLUE}Removing WiFi module reset script...${NC}"
     if [ -f /etc/systemd/system-sleep/reset-wifi-module.sh ]; then
         sudo rm /etc/systemd/system-sleep/reset-wifi-module.sh
-        echo "   ✅ Removed"
+        echo -e "   ${GREEN}Removed${NC}"
     else
-        echo "   ℹ️  Not present"
+        echo -e "   ${CYAN}Not present${NC}"
     fi
 
     echo ""
-    echo "✅ ThinkPad optimizations removed!"
-    echo "⚠️  Reboot required to activate changes"
+    echo -e "${GREEN}ThinkPad optimizations removed!${NC}"
+    echo -e "${YELLOW}Reboot required to activate changes${NC}"

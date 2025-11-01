@@ -20,6 +20,7 @@ modules:
   - from-file: common/codecs.yml
   - from-file: common/extras.yml
   - from-file: common/copr-packages.yml
+  - from-file: common/developer.yml
 
   - type: files
     files:
