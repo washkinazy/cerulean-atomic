@@ -1,36 +1,46 @@
 ---
 # Development environment setup
 modules:
-  # Add third-party repos and install packages using dnf5 (avoids F43 GPG issues with rpm-ostree)
-  - type: containerfile
-    snippets:
-      # Install all third-party packages in fewer layers to avoid max depth
-      - RUN curl -fsSL https://cli.github.com/packages/rpm/gh-cli.repo -o /etc/yum.repos.d/gh-cli.repo && curl -fsSL https://mise.jdx.dev/rpm/mise.repo -o /etc/yum.repos.d/mise.repo && curl -fsSL https://download.docker.com/linux/fedora/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo && rpm --import https://packages.microsoft.com/keys/microsoft.asc && printf '[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=0\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc\n' > /etc/yum.repos.d/vscode.repo
-      - RUN dnf5 config-manager setopt gh-cli.enabled=1 code.enabled=1 docker-ce-stable.enabled=1 mise-repo.enabled=1 && dnf5 install -y gh mise code docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && dnf5 config-manager setopt gh-cli.enabled=0 code.enabled=0 docker-ce-stable.enabled=0 mise-repo.enabled=0
-
-  # Install packages from Fedora repos using dnf
   - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://cli.github.com/packages/rpm/gh-cli.repo
+        - https://mise.jdx.dev/rpm/mise.repo
+        - https://download.docker.com/linux/fedora/docker-ce.repo
+        - https://packages.microsoft.com/yumrepos/vscode/config.repo
+      keys:
+        - https://packages.microsoft.com/keys/microsoft.asc
     install:
+      install-weak-deps: false
       packages:
-      - kernel-devel
-      # Version control
-      - git
-      # Development utilities
-      - just
-      - yamllint
-      - shellcheck
-      - jq
-      # Container/flatpak tools
-      - podman-compose
-      - distrobox
-      # Virtualization
-      - "@virtualization"
-      # Programming languages
-      - rust
-      - cargo
-      - pip
-      - pipx
-      - golang
+        # Fedora repos
+        - kernel-devel
+        - git
+        - just
+        - yamllint
+        - shellcheck
+        - jq
+        - podman-compose
+        - distrobox
+        - "@virtualization"
+        - rust
+        - cargo
+        - pip
+        - pipx
+        - golang
+        # GitHub CLI repo
+        - gh
+        # mise repo
+        - mise
+        # VS Code repo
+        - code
+        # Docker CE repo
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
 
   # Configure libvirt networking
   - type: files

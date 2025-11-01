@@ -9,3 +9,13 @@ modules:
       - rsms-inter-fonts            # Inter typeface
       - rsms-inter-vf-fonts         # Inter variable fonts
       - jetbrains-mono-fonts-all    # JetBrains Mono typeface
+
+  - type: fonts
+    fonts:
+      nerd-fonts:
+        - FiraCode # don't add spaces or "Nerd Font" suffix
+        - Hack
+        - SourceCodePro
+        - Terminus
+        - JetBrainsMono
+        - NerdFontsSymbolsOnly

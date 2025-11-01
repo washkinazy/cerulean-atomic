@@ -1,16 +1,13 @@
 ---
 # Extra packages for quality of life
 modules:
-  - type: containerfile
-    snippets:
-      # Add Tailscale repository and install
-      - RUN curl -fsSL https://pkgs.tailscale.com/stable/fedora/tailscale.repo -o /etc/yum.repos.d/tailscale.repo
-      - RUN dnf install -y tailscale
-      # Remove Tailscale repo file after install (security best practice)
-      - RUN rm -f /etc/yum.repos.d/tailscale.repo
-
-# This is disabled by default. Only used in some setups and will be anabled post install.
-  # - type: systemd
-  #   system:
-  #     enabled:
-  #       - tailscaled.service
+  - type: dnf
+    repos:
+      cleanup: true
+      files:
+        - https://pkgs.tailscale.com/stable/fedora/tailscale.repo
+    install:
+      install-weak-deps: false
+      packages:
+        # Third-party repos: tailscale
+        - tailscale
