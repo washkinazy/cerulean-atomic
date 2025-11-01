@@ -2,10 +2,10 @@ modules:
   - type: dnf
     install:
       packages:
-        - fontawesome-6-free-fonts    # FontAwesome 6 free icons
-        - fontawesome-6-brands-fonts  # FontAwesome 6 brand icons
-        - fontawesome4-fonts          # FontAwesome 4 compatibility
-        - fontawesome4-fonts-web      # FontAwesome 4 web fonts
-        - rsms-inter-fonts            # Inter typeface
-        - rsms-inter-vf-fonts         # Inter variable fonts
-        - jetbrains-mono-fonts-all    # JetBrains Mono typeface
+      - fontawesome-6-free-fonts    # FontAwesome 6 free icons
+      - fontawesome-6-brands-fonts  # FontAwesome 6 brand icons
+      - fontawesome4-fonts          # FontAwesome 4 compatibility
+      - fontawesome4-fonts-web      # FontAwesome 4 web fonts
+      - rsms-inter-fonts            # Inter typeface
+      - rsms-inter-vf-fonts         # Inter variable fonts
+      - jetbrains-mono-fonts-all    # JetBrains Mono typeface

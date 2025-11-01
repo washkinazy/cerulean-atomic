@@ -4,13 +4,13 @@
 modules:
   - type: containerfile
     snippets:
+      # Install @multimedia group first (gets -free versions from Fedora)
+      - RUN dnf install -y @multimedia --setopt="install_weak_deps=False"
       # Enable RPM Fusion Free and Nonfree repositories
       - RUN dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+      # Update @multimedia group (replaces -free with full versions from RPM Fusion)
+      - RUN dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
       # Switch from ffmpeg-free to full ffmpeg
       - RUN dnf swap -y ffmpeg-free ffmpeg --allowerasing
-      # Install additional multimedia codecs and gstreamer plugins
-      - RUN dnf update -y @multimedia --setopt="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-      # Disable RPM Fusion repos for security (no longer needed after install)
-      - RUN dnf config-manager --set-disabled rpmfusion-free rpmfusion-free-updates rpmfusion-nonfree rpmfusion-nonfree-updates
-      # Remove RPM Fusion repo files entirely
+      # Remove RPM Fusion repo files for security (no longer needed after install)
       - RUN rm -f /etc/yum.repos.d/rpmfusion-*.repo

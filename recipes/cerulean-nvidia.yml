@@ -7,7 +7,7 @@ description: Cerulean with NVIDIA Open drivers - minimal Fedora Atomic image wit
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: quay.io/fedora-ostree-desktops/base-atomic
-image-version: 42 # Fedora 42 (F43 NVIDIA repos not yet mature)
+image-version: 43 # Fedora 43
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -16,11 +16,12 @@ modules:
   - from-file: common/utilities.yml
   - from-file: common/fonts.yml
   - from-file: common/applications.yml
-  - from-file: common/gaming-42.yml
+  - from-file: common/gaming.yml
   - from-file: common/nvidia-open-modules.yml
   - from-file: common/codecs.yml
   - from-file: common/extras.yml
   - from-file: common/copr-packages.yml
+  - from-file: common/developer.yml
 
   - type: files
     files:
