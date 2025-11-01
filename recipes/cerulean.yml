@@ -18,10 +18,10 @@ modules:
   - from-file: common/applications.yml
   - from-file: common/gaming.yml
 
-  # - type: files
-  #   files:
-  #     - source: system
-  #       destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+  - type: files
+    files:
+      - source: system
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   # - type: dnf
   #   repos:

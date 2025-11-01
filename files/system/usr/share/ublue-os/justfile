@@ -1,0 +1,9 @@
+# Cerulean Just Commands
+# Run with: cjust <command>
+
+# Default recipe to display help
+default:
+    @just --list --unsorted
+
+# Import module files
+import? "just/10-update.just"
