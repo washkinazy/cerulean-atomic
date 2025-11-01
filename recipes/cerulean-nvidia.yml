@@ -1,0 +1,22 @@
+---
+# yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+# image will be published to ghcr.io/washkinazy/cerulean
+name: cerulean-nvidia
+# description will be included in the image's metadata
+description: Cerulean with NVIDIA Open drivers - minimal Fedora Atomic image with COSMIC desktop and container-first development workflow.
+
+# the base image to build on top of (FROM) and the version tag to use
+base-image: quay.io/fedora-ostree-desktops/base-atomic
+image-version: 42 # Fedora 42 (F43 NVIDIA repos not yet mature)
+
+# module configuration, executed in order
+# you can include multiple instances of the same module
+modules:
+  - from-file: common/cosmic-de.yml
+  - from-file: common/utilities.yml
+  - from-file: common/fonts.yml
+  - from-file: common/applications.yml
+  - from-file: common/gaming-42.yml
+  - from-file: common/nvidia-open-modules.yml
+
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully

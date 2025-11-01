@@ -16,6 +16,7 @@ modules:
   - from-file: common/utilities.yml
   - from-file: common/fonts.yml
   - from-file: common/applications.yml
+  - from-file: common/gaming.yml
 
   # - type: files
   #   files:

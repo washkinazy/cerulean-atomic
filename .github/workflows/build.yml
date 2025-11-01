@@ -28,7 +28,8 @@ jobs:
       matrix:
         recipe:
           # Fedora versions
-          - recipe.yml          # Fedora 43
+          - cerulean.yml        # Fedora 43
+          - cerulean-nvidia.yml # Fedora 43 + NVIDIA Open
     steps:
       # the build is fully handled by the reusable github action
       - name: Build Custom Image

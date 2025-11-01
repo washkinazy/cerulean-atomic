@@ -1,0 +1,10 @@
+modules:
+  - type: containerfile
+    snippets:
+      # Copy akmods packages from ublue-os (Xbox wireless adapter support)
+      - COPY --from=ghcr.io/ublue-os/akmods:main-42 /rpms/ublue-os/ublue-os-akmods-addons*.rpm /tmp/rpms-gaming/
+      - COPY --from=ghcr.io/ublue-os/akmods:main-42 /rpms/kmods/kmod-xone*.rpm /tmp/rpms-gaming/
+      # Install ublue-os akmods configuration (sets up repos for kmod-common packages)
+      - RUN rpm-ostree install /tmp/rpms-gaming/ublue-os-akmods-addons*.rpm
+      # Install xone kernel module and dependencies
+      - RUN rpm-ostree install /tmp/rpms-gaming/kmod-xone*.rpm xone-kmod-common

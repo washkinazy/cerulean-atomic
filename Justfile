@@ -5,8 +5,9 @@
 image_name := "cerulean"
 
 # Available versions
-version_43 := "recipe.yml"
-version_rawhide := "recipe-rawhide.yml"
+version_43 := "cerulean.yml"
+version_nvidia := "cerulean-nvidia.yml"
+version_rawhide := "cerulean-rawhide.yml"
 
 # Default recipe to use
 default_recipe := version_43
@@ -32,6 +33,11 @@ build RECIPE=default_recipe:
 build-43:
     @just build {{ version_43 }}
 
+# Build Fedora 43 NVIDIA variant
+[group('Development')]
+build-nvidia:
+    @just build {{ version_nvidia }}
+
 # Build Fedora Rawhide variant
 [group('Development')]
 build-rawhide:
@@ -50,6 +56,11 @@ iso RECIPE=default_recipe OUTPUT="cerulean.iso":
 [group('Development')]
 iso-43:
     @just iso {{ version_43 }} cerulean-43.iso
+
+# Generate ISO for Fedora 43 NVIDIA
+[group('Development')]
+iso-nvidia:
+    @just iso {{ version_nvidia }} cerulean-nvidia.iso
 
 # Generate ISO for Fedora Rawhide
 [group('Development')]

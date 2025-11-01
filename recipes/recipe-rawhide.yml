@@ -3,7 +3,7 @@
 ###      NOT ACTIVE      ###
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/washkinazy/cerulean
-name: cerulean
+name: cerulean-rawhide
 # description will be included in the image's metadata
 description: A minimal Fedora Atomic image with COSMIC desktop, latest kernel, and container-first development workflow.
 

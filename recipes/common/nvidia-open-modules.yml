@@ -1,0 +1,23 @@
+modules:
+  - type: containerfile
+    snippets:
+      # Copy pre-built NVIDIA Open kernel modules from ublue-os
+      - COPY --from=ghcr.io/ublue-os/akmods-nvidia-open:main-42 /rpms/ /tmp/rpms
+      - RUN find /tmp/rpms
+      # Install ublue NVIDIA configuration package (sets up repos)
+      - RUN rpm-ostree install /tmp/rpms/ublue-os/ublue-os-nvidia*.rpm
+      # Enable nvidia-container-toolkit repo
+      - RUN sed -i '0,/enabled=0/{s/enabled=0/enabled=1/}' /etc/yum.repos.d/nvidia-container-toolkit.repo
+      # Enable negativo17 nvidia repo with priority
+      - RUN sed -i '0,/enabled=0/{s/enabled=0/enabled=1\npriority=90/}' /etc/yum.repos.d/negativo17-fedora-nvidia.repo
+      # Install kernel modules and userspace drivers
+      - RUN rpm-ostree install /tmp/rpms/kmods/kmod-nvidia*.rpm libnvidia-fbc libva-nvidia-driver nvidia-driver nvidia-driver-cuda nvidia-modprobe nvidia-persistenced nvidia-container-toolkit
+
+  - type: script
+    scripts:
+      - nvidia-post-install.sh
+
+  - type: systemd
+    system:
+      enabled:
+        - nvidia-persistenced.service

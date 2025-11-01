@@ -22,14 +22,15 @@ systemctl reboot
 
 ## Available Images
 
-- `cerulean:latest` - Fedora 43 stable
+- `cerulean:latest` - Fedora 43
+- `cerulean-nvidia:latest` - Fedora 42 with NVIDIA Open drivers (F43 repos not yet mature)
 
 ## ISO Installation
 
 Generate a bootable ISO locally:
 ```bash
-just iso-43        # Fedora 43
-just iso-rawhide   # Fedora Rawhide
+just iso-43      # Fedora 43
+just iso-nvidia  # Fedora 43 with NVIDIA
 ```
 
 After installing from the ISO, you must rebase to the container image:
@@ -52,6 +53,6 @@ cosign verify --key cosign.pub ghcr.io/washkinazy/cerulean:latest
 
 Build locally:
 ```bash
-just build-43      # Build Fedora 42 image
-just build-rawhide # Build Fedora Rawhide image
+just build-43     # Build Fedora 43
+just build-nvidia # Build Fedora 43 with NVIDIA
 ```
