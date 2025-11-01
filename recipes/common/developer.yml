@@ -12,7 +12,6 @@ modules:
       keys:
         - https://packages.microsoft.com/keys/microsoft.asc
     install:
-      install-weak-deps: false
       packages:
         # Fedora repos
         - kernel-devel
